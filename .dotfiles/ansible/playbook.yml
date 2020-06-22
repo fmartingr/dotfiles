@@ -1,0 +1,33 @@
+---
+- name: Archlinux hosts
+  hosts: archlinux
+  roles:
+  - archlinux
+
+- name: Services
+  hosts: all
+  roles:
+    - services/ssh
+
+- name: Config
+  hosts: all
+  roles:
+    - config/path
+    - config/timedatectl
+- name: Software
+  hosts: all
+  roles:
+    - software/git
+    - software/shell
+
+- name: Thinkpad
+  hosts: thinkpad
+  roles:
+    - software/plymouth
+    - software/browsers
+    - software/terminals
+    - software/editors
+    - software/networkmanager
+    - name: rice/i3wm
+      tags:
+        - rice

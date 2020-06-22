@@ -1,0 +1,26 @@
+---
+- name: Install plymouth
+  become: yes
+  package:
+    name:
+        - plymouth
+    state: latest
+
+- name: Install theme
+  shell: yay -S plymouth-theme-{{ plymouth_theme }}-git --noconfirm --timeupdate
+  tags:
+    - install
+    - config
+  notify:
+    - update plymouth
+
+- name: Ensure setup on mkinitpio.conf
+  become: yes
+  tags:
+  - config
+  lineinfile:
+    backup: yes
+    path: /etc/mkinitcpio.conf
+    regexp: '^HOOKS="base udev (plymouth)?(.*)"'
+    line: HOOKS="base udev plymouth \1"
+    backrefs: true

@@ -1,0 +1,5 @@
+- name: update plymouth
+  become: yes
+  shell: "plymouth-set-default-theme -R {{ plymouth_theme|replace('-', '_') }}"
+  tags:
+    - config

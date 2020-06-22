@@ -1,0 +1,11 @@
+---
+- name: Update system
+  become: true
+  shell: "pacman -Syyu --noconfirm"
+  tags:
+    - install
+
+- name: Update AUR packages
+  shell: "yay -Syu --noconfirm"
+  tags:
+    - install

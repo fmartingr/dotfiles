@@ -1,0 +1,16 @@
+---
+- name: Ensure .path.d is present
+  file:
+    path: "/home/{{ ansible_user }}/.path.d"
+    state: directory
+  tags:
+    - user_config
+
+- name: Ensure script is present
+  copy:
+    remote_src: false
+    src: .path.sh
+    dest: "/home/{{ ansible_user }}/.path.sh"
+    mode: 0700
+  tags:
+    - user_config

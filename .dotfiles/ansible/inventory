@@ -1,0 +1,28 @@
+# Pseudo dynamic inventory file
+# A bash script will uncomment the lines with the hostname where the playbook is running, this
+# way we avoid errors of unreachable hosts and playbook is only applied using local connection
+# on the appropriate host.
+
+#thinkpad
+#thousand-sunny
+#deru
+
+[archlinux]
+#thinkpad
+#thousand-sunny
+#deru
+
+[personal]
+#deru
+#thousand-sunny
+
+[laptop]
+#deru
+#thinkpad
+
+[work]
+#thinkpad
+
+[all:vars]
+ansible_connection=local
+ansible_python_interpreter=/usr/bin/python3

@@ -1,0 +1,8 @@
+---
+# TODO: Find a better way to retrieve the socket path
+- name: reload i3 config
+  shell: i3-msg -s $(ps x | grep i3 | grep socket | cut -d "=" -f 3) reload
+- name: restart polybar
+  shell: polybar-msg cmd restart
+- name: restart picom
+  shell: killall picom && picom -b

@@ -1,0 +1,5 @@
+# Browsers to have installed
+browsers_packages:
+- firefox
+- google-chrome
+- qutebrowser

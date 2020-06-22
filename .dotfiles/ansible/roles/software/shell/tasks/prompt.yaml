@@ -1,0 +1,5 @@
+---
+- name: Install starship prompt
+  shell: yay -S starship-bin --noconfirm
+  tags:
+    - install

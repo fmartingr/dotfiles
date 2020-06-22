@@ -1,0 +1,3 @@
+shell_zsh_packages:
+    - oh-my-zsh-git
+    - antigen-git

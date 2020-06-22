@@ -1,0 +1,21 @@
+[user]
+	email = me@fmartingr.com
+	name = Felipe M.
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+	editor = vim
+
+[alias]
+	s = status
+	d = diff
+	co = checkout
+	br = branch
+	last = log -1 HEAD
+	cane = commit --amend --no-edit
+	lo = log --oneline -n 10

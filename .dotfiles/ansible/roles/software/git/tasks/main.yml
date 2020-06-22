@@ -1,0 +1,17 @@
+---
+- name: Ensure installed
+  become: yes
+  package:
+    name:
+        - git
+        - git-lfs
+    state: latest
+  tags:
+    - install
+
+- name: Ensure .gitconfig is up to date
+  template:
+    src: .gitconfig.j2
+    dest: "/home/{{ ansible_user }}/.gitconfig"
+  tags:
+    - user_config

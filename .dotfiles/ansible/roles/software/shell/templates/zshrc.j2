@@ -1,0 +1,15 @@
+# Load antigen
+source /usr/share/zsh/share/antigen.zsh
+# Starship shell
+source <("/usr/bin/starship" init zsh --print-full-init)
+
+# oh-my-zsh plugin
+antigen use oh-my-zsh
+
+# Set theme
+antigen theme blinks
+
+antigen apply
+
+# Load custom paths
+. $HOME/.path.sh

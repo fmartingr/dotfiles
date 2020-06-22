@@ -1,0 +1,16 @@
+---
+- name: Ensure installed
+  become: yes
+  tags:
+  - install
+  package:
+    name: networkmanager
+    state: latest
+
+- name: Ensure openvpn plugin
+  become: yes
+  tags:
+  - install
+  package:
+    name: networkmanager-openvpn
+    state: latest

@@ -1,0 +1,6 @@
+---
+- name: Enable ntp
+  become: yes
+  tags:
+    - config
+  shell: timedatectl set-ntp true

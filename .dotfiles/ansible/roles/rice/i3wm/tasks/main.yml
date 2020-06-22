@@ -1,0 +1,58 @@
+# Installs i3wm rice and tools
+---
+- name: Ensure i3-gaps is installed
+  become: yes
+  package:
+    name: i3-gaps
+    state: latest
+  tags:
+    - install
+- name: Ensure tools are installed
+  become: yes
+  package:
+    name:
+        - i3lock-color # Lockscreen
+        - flameshot # Screenshots
+        - xorg-xbacklight # Control laptop lighting
+        - dunst # notifications
+        - rofi # Menus
+        - polybar # status bar
+        - picom # compositor
+        - feh # Wallpaper
+    state: latest
+  tags:
+    - install
+
+- name: install i3 configuration
+  template:
+    src: .config/i3/config
+    dest: "/home/{{ ansible_user }}/.config/i3/config"
+  tags:
+    - user_config
+  notify:
+    - reload i3 config
+
+- name: install picom configuration
+  template:
+    src: .config/picom.conf
+    dest: "/home/{{ ansible_user }}/.config/picom.conf"
+  tags:
+    - user_config
+  notify:
+    - reload i3 config
+    - restart picom
+
+- name: Ensure polybar config folder is present
+  file:
+    path: "/home/{{ ansible_user }}/.config/polybar"
+    state: directory
+  tags:
+    - user_config
+- name: Install polybar configuration
+  template:
+    src: .config/polybar/config.ini
+    dest: "/home/{{ ansible_user }}/.config/polybar/config.ini"
+  notify:
+    - restart polybar
+  tags:
+    - user_config

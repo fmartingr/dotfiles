@@ -1,0 +1,10 @@
+---
+- include: prompt.yaml
+- include: zsh.yaml
+
+- name: Ensure .path file is loaded in .bash_profile
+  lineinfile:
+    line: "[[ -f ~/.path.sh ]] && . ~/.path.sh"
+    path: ~/.bash_profile
+  tags:
+    - user_config

@@ -1,0 +1,11 @@
+---
+- name: Ensure (n)vim is installed
+  become: yes
+  tags:
+  - install
+  package:
+    name:
+    - neovim
+    - vim
+    - code
+    state: latest

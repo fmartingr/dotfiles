@@ -1,0 +1,6 @@
+---
+- name: Install
+  # become: true
+  shell: "yay -S --noconfirm {{ browsers_packages|join(' ') }} --timeupdate"
+  tags:
+    - install

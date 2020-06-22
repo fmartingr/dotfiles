@@ -1,0 +1,2 @@
+# (bool) Use this to enable/disable the ssh server (systemd service)
+ssh_server_enabled: true

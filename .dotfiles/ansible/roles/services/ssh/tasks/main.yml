@@ -1,0 +1,9 @@
+---
+- name: Ensure SSH server is configured
+  become: yes
+  systemd:
+    name: sshd
+    enabled: "{{ ssh_server_enabled }}"
+    state: "{% if ssh_server_enabled %}started{% else %}stopped{% endif %}"
+  tags:
+    - config

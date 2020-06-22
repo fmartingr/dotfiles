@@ -1,0 +1,101 @@
+#!/bin/bash
+# Wrapper script to manage my dotfiles
+# Author: Felipe Martin <me@fmartingr.com>
+# Source code: git.sr.ht/~fmartingr/dotfiles
+
+# Available commands:
+# - apply: Apply the configuration for the specified host (ansible related)
+# - doctor: Checks that everything is in place to run commands
+# - help
+# - pull: Pulls the latest changes
+# - papply: pull + apply
+
+# Exit codes:
+# 1) Unkown command
+# 2) Trying to perform git actions with changes present
+
+DF_CMD=${1:-help}
+REQUIRED_TOOLS=("ansible" "yay")
+
+function df_help {
+    echo "Dotfiles!"
+    echo
+    echo -e "\tapply - Apply the dotfiles (useful when updates where made)"
+    echo -e "\tdoctor - Check requirements for running"
+    echo -e "\tpapply - Pull and apply dotfiles"
+    echo -e "\tpull - Pulls the latest changes"
+}
+
+function text_bold {
+  return "$(tput bold)$1$(tput sgr0)"
+}
+
+function df_doctor {
+  # TODO: Check ssh-key is created on machine
+  # TODO: Check gpg is setup on machine
+  for tool in "${REQUIRED_TOOLS[@]}"; do
+      echo -n "$tool: "
+      if pacman -Qi "$tool" &> /dev/null; then
+        echo "$(tput setaf 40)present$(tput sgr0)"
+      else
+        echo "$(tput setaf 196)$(tput bold)not present$(tput sgr0)"
+      fi
+    done
+}
+
+function df_apply {
+  ansible_flags=
+
+  if [[ $* == *"--rice-only"* ]]; then
+    ansible_flags="--tags rice,user_config --skip-tags install,config"
+  else
+    ansible_flags="--ask-become"
+  fi
+
+  set -xe
+  temp_inventory=$(mktemp)
+  cp "$HOME/.dotfiles/ansible/inventory" "$temp_inventory"
+  sed -i "s/^#$(hostname)/$(hostname)/" "$temp_inventory"
+  ansible-playbook -i "$temp_inventory" "$HOME/.dotfiles/ansible/playbook.yml" $ansible_flags
+  rm "$temp_inventory"
+}
+
+function df_check_changes {
+  cd
+  if ! git diff-index --name-only HEAD --; then
+    echo "ERROR: There are changes present, aborting."
+    exit 2
+  fi
+}
+
+function df_pull {
+  df_check_changes
+  git pull
+}
+
+function df_push {
+  df_check_changes
+  git push
+}
+
+case "$DF_CMD" in
+  "apply")
+    df_apply "$@"
+    ;;
+  "doctor")
+    df_doctor
+    ;;
+  "pull")
+    df_pull
+    ;;
+  "paplly")
+    df_pull
+    df_apply
+    ;;
+  "push")
+    df_push
+    ;;
+  "help" | *)
+    df_help
+    ;;
+esac

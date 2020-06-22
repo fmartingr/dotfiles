@@ -1,0 +1,35 @@
+---
+- name: Ensure zsh is intalled
+  become: yes
+  package:
+    name: zsh
+    state: latest
+  tags:
+    - install
+
+- name: Ensure oh-my-zsh and antigen are installed
+  shell: "yay --noconfirm -S {{ shell_zsh_packages|join(' ') }} --timeupdate"
+  tags:
+    - install
+
+- name: Get zsh shell path
+  become: yes
+  shell: which zsh
+  register: zsh_output
+  tags:
+    - config
+
+- name: Ensure zsh shell is used
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    shell: "{{ zsh_output.stdout }}"
+  tags:
+    - config
+
+- name: Install .zshrc
+  template:
+    src: zshrc.j2
+    dest: "/home/{{ ansible_user }}/.zshrc"
+  tags:
+    - user_config

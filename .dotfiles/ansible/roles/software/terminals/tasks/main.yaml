@@ -1,0 +1,9 @@
+---
+- name: Ensure terminal clients are installed
+  become: yes
+  package:
+    name:
+    - termite
+    state: latest
+  tags:
+    - install
