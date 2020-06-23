@@ -23,7 +23,7 @@
 - name: Thinkpad
   hosts: thinkpad
   roles:
-    - software/plymouth
+    #- software/plymouth
     - software/browsers
     - software/terminals
     - software/editors

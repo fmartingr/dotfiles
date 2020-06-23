@@ -14,3 +14,12 @@
     mode: 0700
   tags:
     - user_config
+
+- name: Install base path for dotfile binaries
+  copy:
+    remote_src: false
+    src: 99-dotfiles-bin.sh
+    dest: "/home/{{ ansible_user }}/.path.d/99-dotfiles-bin.sh"
+    mode: 0700
+  tags: 
+  - user_config

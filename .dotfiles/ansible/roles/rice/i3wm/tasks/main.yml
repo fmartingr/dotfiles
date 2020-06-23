@@ -23,6 +23,13 @@
   tags:
     - install
 
+- name: Ensure i3 config path exists
+  file:
+    path: "/home/{{ ansible_user }}/.config/i3"
+    state: directory
+  tags:
+  - user_config
+
 - name: install i3 configuration
   template:
     src: .config/i3/config

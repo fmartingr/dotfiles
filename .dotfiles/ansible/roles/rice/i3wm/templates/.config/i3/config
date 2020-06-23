@@ -284,7 +284,11 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 # exec --no-startup-id autorandr --change
 # exec --no-startup-id zeal
 
+# ----------------------
+# STARTUP
+# ----------------------
 exec --no-startup-id picom -b
 exec --no-startup-id polybar -c ~/.config/polybar/config.ini main
+exec --no-startup-id nm-applet
 
 # exec_always --no-startup-id wal -i ~/.wallpaper
