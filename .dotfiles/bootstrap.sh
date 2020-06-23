@@ -1,11 +1,29 @@
-#!/bin/bash -xe
-# Base install script for Arch Linux computers
-# Run before any playbook since this installs
-# dependencies required by the playbooks themselves
-# (including ansible!)
+#!/bin/bash
 
+REMOTE=git@git.sr.ht:~fmartingr/dotfiles
+
+cd
+
+if [ ! -d ~/.ssh ]; then
+	echo "ERROR! There's no ssh key setup?"
+	exit 1
+fi
+
+# Init dotfiles
+if [ ! -d .git ]; then
+	git init
+fi
+if [ "$(git remote -v)" == "" ]; then
+	git remote add origin $REMOTE
+fi
+
+git fetch
+git checkout -f master
+
+# Install requirements
 sudo pacman -Syy ansible yay --noconfirm
 
 # Apply dotfiles
-cd
 ~/.dotfiles/bin/dotfiles apply
+
+echo "Finished!"
