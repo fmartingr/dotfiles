@@ -1,123 +1,94 @@
 # i3 config file
 # Docs: http://i3wm.org/docs/userguide.html
 
-# Main modifier key (Super)
+# ----------------------
+# VARIABLES
+# ----------------------
 set $mod Mod4
-
-# Variables user through the configuration
-set $shell /usr/bin/zsh
-set $termCommand termite
-set $appLauncher rofi -show drun
-set $locker ~/.config/i3/i3lock.sh && sleep 1
-set $monospaceFont Mononoki
+set $shift Mod2
+set $cmdTerm termite
+set $cmdLauncher rofi -show drun
+set $cmdFileBrowser thunar
+set $cmdLock /bin/bash ~/.config/i3/i3lock.sh
+set $fontFamily Droid Mono Sans
 set $fontSize 11
 
 # Displays
-set $mainDisplay DP-0
-set $auxDisplay HDMI-0
+# TODO: get displays from ansible facts or host configuration
+set $displayMain DP-0
+set $displayAux HDMI-0
 
-# Workspaces
-workspace 1 output $mainDisplay
-workspace 2 output $mainDisplay
-workspace 3 output $mainDisplay
-workspace 4 output $mainDisplay
-workspace 5 output $mainDisplay
-workspace 6 output $mainDisplay
-workspace 7 output $mainDisplay
-workspace 8 output $mainDisplay
-workspace 9 output $mainDisplay
-workspace 10 output $mainDisplay
-workspace 11 output $auxDisplay
-workspace 12 output $auxDisplay
+# ----------------------
+# WORKSPACES
+# ----------------------
+workspace 1 output $displayMain
+workspace 2 output $displayMain
+workspace 3 output $displayMain
+workspace 4 output $displayMain
+workspace 5 output $displayMain
+workspace 6 output $displayMain
+workspace 7 output $displayMain
+workspace 8 output $displayMain
+workspace 9 output $displayMain
+workspace 10 output $displayMain
+workspace 11 output $displayAux
+workspace 12 output $displayAux
 
-# Colors
-# Set colors from Xresources
-# Change 'color7' and 'color2' to whatever colors you want i3 to use
-# from the generated scheme.
-# NOTE: The '#f0f0f0' in the lines below is the color i3 will use ihf
-# it fails to get colors from Xresources.
-# set_from_resource $fg i3wm.color7 #f0f0f0
-# set_from_resource $bg i3wm.color2 #f0f0f0
+# ----------------------
+# EYE CANDY
+# ----------------------
+# Font
+font xft:$fontFamily $fontSize
 
-# class                 border  backgr. text indicator child_border
-# client.focused          $bg     $bg     $fg  $bg       $bg
-# client.focused_inactive $bg     $bg     $fg  $bg       $bg
-# client.unfocused        $bg     $bg     $fg  $bg       $bg
-# client.urgent           $bg     $bg     $fg  $bg       $bg
-# client.placeholder      $bg     $bg     $fg  $bg       $bg
-
-# client.background       $bg
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font xft:$monospaceFont $fontSize
-
-# thin borders
+# Borders
 hide_edge_borders both
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+# Modifier to move floating windows
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec --no-startup-id $termCommand
+# ----------------------
+# KEYBINDINGS
+# ----------------------
+# Start a terminal
+bindsym $mod+Return exec --no-startup-id $cmdTerm
 
-# kill focused window
+# Kill window
 bindsym $mod+Shift+q kill
 
 # App launcher
-bindsym $mod+d exec --no-startup-id $appLauncher
+bindsym $mod+d exec --no-startup-id $cmdLauncher
 
-# change focus
-# bindsym $mod+j focus left
-# bindsym $mod+k focus down
-# bindsym $mod+l focus up
-# bindsym $mod+ntilde focus right
-
-# alternatively, you can use the cursor keys:
+# Change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ntilde move right
-
-# alternatively, you can use the cursor keys:
+# Move focused window
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# Split horizontal/vertical
 bindsym $mod+h split h
-
-# split in vertical orientation
 bindsym $mod+v split v
 
-# enter fullscreen mode for the focused container
+# Put window in fullscreen (toggle)
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
+# Change container layour
 bindsym $mod+Shift+s layout stacking
 bindsym $mod+Shift+w layout tabbed
 bindsym $mod+Shift+e layout toggle split
 
-# toggle tiling / floating
+# Toggle floating window
 bindsym $mod+Shift+space floating toggle
 
-# change focus between tiling / floating windows
+# Change focus between floating and tiling
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# switch to workspace
+# Switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -131,7 +102,7 @@ bindsym $mod+0 workspace 10
 bindsym $mod+Mod1+1 workspace 11
 bindsym $mod+Mod1+2 workspace 12
 
-# move focused container to workspace
+# Move window to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -145,87 +116,76 @@ bindsym $mod+Shift+0 move container to workspace 10
 bindsym $mod+Shift+Mod1+1 move container to workspace 11
 bindsym $mod+Shift+Mod1+2 move container to workspace 12
 
-# reload the configuration file
+# Reload configuration file
 bindsym $mod+Shift+c reload
 
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+# Restart i3 in place
 bindsym $mod+Shift+r restart
 
-# exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# Lock the screen
+bindsym $mod+l exec $cmdLock
 
-# lock
-# bindsym $mod+l exec i3Shiftlock --color 475263
-bindsym $mod+l exec /bin/bash ~/.config/i3/i3lock.sh
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad # Move window to scratchpad
+bindsym $mod+minus scratchpad show # Iterate scratchpad windows
+bindsym $mod+x floating disable # Remove window from scratchpad
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# Toggle window as sticky
+bindsym $mod+j sticky toggle
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        # bindsym j resize shrink width 10 px or 10 ppt
-        # bindsym k resize grow height 10 px or 10 ppt
-        # bindsym l resize shrink height 10 px or 10 ppt
-        # bindsym ntilde resize grow width 10 px or 10 ppt
+# Exec file browser
+bindsym $mod+e exec $cmdFileBrowser
 
-        # same bindings, but for the arrow keys
+# ----------------------
+# MODES
+# ----------------------
+
+# Resize mode
+set $modeResize RESIZE
+mode "$modeResize" {
+        # Resize with arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
         bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
+        # Exit mode
         bindsym Escape mode "default"
 }
 
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode $modeResize
 
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id $locker, mode "default"
+# System mode
+set $modeSystem SYSTEM (e)xit, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode "$modeSystem" {
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
-    bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
+    bindsym s exec --no-startup-id $cmdLock && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $cmdLock && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
-    bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-bindsym $mod+F12 mode "$mode_system"
+bindsym $mod+F12 mode "$modeSystem"
 
-# Floating windows
-for_window [window_role="pop-up"] floating enable # popups floating by default
-for_window [class="^zoom.*"] floating enable # Zoom.app
+# ----------------------
+# CUSTOMIZATION  
+# ----------------------
+
+# Floating windows by default
+for_window [window_role="pop-up"] floating enable # popups
 for_window [class="Zeal"] floating enable # Zeal
 
-# Windows without titlebars
+# No titlebars
 for_window [class="^.*"] border pixel 2
 
-# Prevent windows from focusing when mouse is stuck
+# Disable cursor following the focused windows
 focus_follows_mouse off
 
-# Scratchpad
-# Move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
-
-# Remove windows from scratchpad
-bindsym $mod+x floating disable
-
-# Toggle window as sticky (to use in PIP mode)
-bindsym $mod+j sticky toggle
-# bindsym $mod+shift+p exec "$HOME/.config/i3/i3-pip toggle"
-# bindsym $mod+ctrl+p exec "$HOME/.config/i3/i3-pip move"
-
-bindsym $mod+e exec nautilus
+# ----------------------
+# BAR  
+# ----------------------
 
 # Disable i3 status bar
 bar {
@@ -236,7 +196,7 @@ bar {
 # THEME
 # ----------------------
 
-# aps
+# Gaps
 gaps inner 8
 gaps outer 8
 smart_gaps on
@@ -265,31 +225,20 @@ bindsym Shift+Mod1+4 exec flameshot gui --path ~/Pictures/Screenshots
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
-# Remap keys (Dell XPS)
-# exec xmodmap -e "keycode 112 = Left"
-# exec xmodmap -e "keycode 117 = Right"
-# bindsym Ctrl+Down exec xdotool key 117
-# bindsym Ctrl+Up exec xdotool key 112
-
-# Autostart apps
-# exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-# exec --no-startup-id polybar
-# exec --no-startup-id nm-applet
-# exec --no-startup-id blueman-applet
-# exec --no-startup-id redshift-gtk
-# exec --no-startup-id dunst
-# exec --no-startup-id synology-drive
-# exec --no-startup-id flatpak run com.borgbase.Vorta
-# exec --no-startup-id xset r rate 200 35
-# exec --no-startup-id autorandr --change
-# exec --no-startup-id zeal
 
 # ----------------------
 # STARTUP
 # ----------------------
+# exec --no-startup-id nm-applet
+# exec --no-startup-id blueman-applet
+# exec --no-startup-id redshift-gtk
+# exec --no-startup-id synology-drive
+# exec --no-startup-id flatpak run com.borgbase.Vorta
+# exec --no-startup-id xset r rate 200 35
+# exec --no-startup-id zeal
+exec --no-startup-id autorandr --change
 exec --no-startup-id picom -b
 exec --no-startup-id polybar -c ~/.config/polybar/config.ini main
 exec --no-startup-id nm-applet
+exec --no-startup-id dunst
 exec --no-startup-id feh --bg-fill ~/.wallpaper
-
-# exec_always --no-startup-id wal -i ~/.wallpaper
