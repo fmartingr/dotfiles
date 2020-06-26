@@ -4,7 +4,19 @@
   package:
     name: weechat
     state: latest
+  tags:
+  - install
+
+- name: Ensure telegram-desktop is installed
+  become: yes
+  package:
+    name: telegram-desktop
+    state: latest
+  tags:
+  - install
 
 # TODO: Only for work
 - name: Ensure slack is installed
   shell: yay -S --noconfirm slack-desktop
+  tags:
+  - install
