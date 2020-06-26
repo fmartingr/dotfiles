@@ -8,3 +8,10 @@
     path: ~/.bash_profile
   tags:
     - user_config
+
+- name: Ensure .ssh/config is up to date
+  template:
+    src: .ssh/config
+    dest: "/home/{{ ansible_user }}/.ssh/config"
+  tags:
+    - user_config

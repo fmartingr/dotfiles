@@ -1,0 +1,24 @@
+---
+- name: enable libvirtd
+  become: yes
+  systemd:
+    name: libvirtd
+    enabled: yes
+
+- name: restart libvirtd
+  become: yes
+  systemd:
+    name: libvirtd
+    state: restarted
+
+- name: enable dnsmasq
+  become: yes
+  systemd:
+    name: dnsmasq
+    enabled: yes
+
+- name: restart dnsmasq
+  become: yes
+  systemd:
+    name: dnsmasq
+    state: restarted

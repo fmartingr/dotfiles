@@ -1,0 +1,10 @@
+---
+- name: Ensure nodejs and yarn are installed
+  become: yes
+  package:
+    name:
+      - nodejs
+      - yarn
+    state: latest
+  tags:
+  - install

@@ -1,0 +1,30 @@
+---
+- name: Ensure software is installed
+  become: yes
+  package:
+    name: 
+      - libvirt
+      - ebtables
+      - dnsmasq
+      - bridge-utils
+      - qemu
+    state: latest
+  tags:
+    - install
+  notify:
+    - enable dnsmasq
+    - restart dnsmasq
+    - enable libvirtd
+    - restart libvirtd
+
+
+- name: Ensure upstream nameserver in dnsmasq
+  become: yes
+  lineinfile:
+    line: server=9.9.9.9
+    path: /etc/dnsmasq.conf
+    state: present
+  notify:
+    - restart dnsmasq
+  tags:
+    - config

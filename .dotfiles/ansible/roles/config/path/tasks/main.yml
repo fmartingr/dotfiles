@@ -23,3 +23,12 @@
     mode: 0700
   tags: 
   - user_config
+
+- name: Install base path for home binaries
+  copy:
+    remote_src: false
+    src: 99-home-bin.sh
+    dest: "/home/{{ ansible_user }}/.path.d/99-home-bin.sh"
+    mode: 0700
+  tags: 
+  - user_config

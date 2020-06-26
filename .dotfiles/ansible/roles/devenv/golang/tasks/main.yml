@@ -1,0 +1,8 @@
+---
+- name: Ensure golang is installed
+  become: yes
+  package:
+    name: go
+    state: latest
+  tags:
+  - install

@@ -1,0 +1,8 @@
+---
+- name: Ensure kubectl is installed
+  become: yes
+  package:
+    name: kubectl
+    state: latest
+  tags:
+    - install

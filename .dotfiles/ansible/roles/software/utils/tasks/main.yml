@@ -1,0 +1,9 @@
+---
+- name: Ensure utils are installed
+  become: yes
+  package:
+    name:
+    - jq # JSON manipulation in terminal
+    state: latest
+  tags:
+    - install
