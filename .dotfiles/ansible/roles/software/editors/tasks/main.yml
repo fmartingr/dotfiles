@@ -5,7 +5,14 @@
   - install
   package:
     name:
-    - neovim
-    - vim
-    - code
+      - neovim
+      - vim
+    state: latest
+
+- name: Ensure code is installed
+  become: yes
+  tags:
+  - install
+  package:
+    name: code
     state: latest

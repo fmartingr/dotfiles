@@ -39,3 +39,23 @@
     - name: rice/kde
       tags:
         - rice
+
+- name: Deru
+  hosts: deru
+  roles:
+    #- software/plymouth
+    - software/browsers
+    - software/terminals
+    - software/editors
+    - software/networkmanager
+    - software/kvm
+    - software/im
+    # - software/openshift
+    # - devenv/frontend
+    # - devenv/golang
+    # - name: rice/i3wm
+    #   tags:
+    #    - rice
+    - name: rice/kde
+      tags:
+        - rice
