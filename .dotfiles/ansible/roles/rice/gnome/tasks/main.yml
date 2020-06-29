@@ -1,0 +1,29 @@
+---
+- name: Ensure packages are installed
+  become: yes
+  package:
+    name: 
+    - gnome
+    - gnome-tweaks
+    - arc-gtk-theme
+    - arc-icon-theme
+    - gnome-shell-extension-nightthemeswitcher
+    state: latest
+  tags:
+    - install
+
+- name: Enable extensions
+  shell: "gnome-extensions enable {{ item }}"
+  with_items:
+  - nightthemeswitcher@romainvigier.fr
+  tags:
+  - user_config
+
+- name: Ensure GDM is enabled
+  become: yes
+  systemd:
+    name: gdm
+    force: yes # Overwrite any other DM
+    enabled: yes
+  tags:
+    - config
