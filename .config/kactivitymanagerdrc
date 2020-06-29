@@ -1,0 +1,22 @@
+[Plugins]
+org.kde.ActivityManager.ResourceScoringEnabled=true
+org.kde.ActivityManager.VirtualDesktopSwitchEnabled=true
+
+[activities]
+195868c5-6164-4e56-9897-a84a836bfb00=Personal
+2316b811-86f1-4c90-a709-caac8da41e44=Red Hat
+3297aaac-ef6f-45b3-9c65-a305145aeecf=Supercalifragi
+a6daa4e0-b1ef-4c67-a501-90677d184725=Gaming
+deb28737-2c8a-48e0-9687-34422911b6b3=Coding
+
+[activities-icons]
+195868c5-6164-4e56-9897-a84a836bfb00=kuser
+2316b811-86f1-4c90-a709-caac8da41e44=folder-red
+3297aaac-ef6f-45b3-9c65-a305145aeecf=activities
+a6daa4e0-b1ef-4c67-a501-90677d184725=steam
+deb28737-2c8a-48e0-9687-34422911b6b3=com.visualstudio.code
+
+[main]
+currentActivity=a6daa4e0-b1ef-4c67-a501-90677d184725
+runningActivities=deb28737-2c8a-48e0-9687-34422911b6b3,195868c5-6164-4e56-9897-a84a836bfb00,2316b811-86f1-4c90-a709-caac8da41e44,a6daa4e0-b1ef-4c67-a501-90677d184725
+stoppedActivities=
