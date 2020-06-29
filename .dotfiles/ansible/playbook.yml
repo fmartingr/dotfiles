@@ -33,6 +33,9 @@
     - software/openshift
     - devenv/frontend
     - devenv/golang
-    - name: rice/i3wm
+    # - name: rice/i3wm
+    #   tags:
+    #    - rice
+    - name: rice/kde
       tags:
         - rice
