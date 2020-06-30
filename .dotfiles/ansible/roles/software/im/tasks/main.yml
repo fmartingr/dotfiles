@@ -15,6 +15,14 @@
   tags:
   - install
 
+- name: Ensure weechat is installed
+  become: yes
+  package:
+    name: weechat
+    state: latest
+  tags:
+  - install
+
 # TODO: Only for work
 - name: Ensure slack is installed
   shell: yay -S --noconfirm slack-desktop

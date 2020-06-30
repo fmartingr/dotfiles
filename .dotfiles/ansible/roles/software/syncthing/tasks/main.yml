@@ -1,0 +1,17 @@
+---
+- name: Ensure syncthing is installed
+  become: yes
+  package:
+    name: syncthing
+    state: latest
+  tags:
+  - install
+
+- name: Ensure syncthing service is enabled (as user)
+  systemd:
+    name: syncthing
+    state: started
+    enabled: yes
+    scope: user
+  tags:
+  - config
