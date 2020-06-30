@@ -62,7 +62,8 @@ function df_apply {
 
 function df_check_changes {
   cd
-  if git diff-index --name-only HEAD -- > /dev/null; then
+  git diff-index --name-only HEAD -- 2&> /dev/null
+  if [[ "$?" != "0" ]]; then
     echo "ERROR: There are changes present, aborting."
     exit 2
   fi
