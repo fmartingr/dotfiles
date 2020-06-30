@@ -23,6 +23,15 @@
   tags:
   - install
 
+- name: Ensure discord is installed
+  become: yes
+  package:
+    name: discord
+    state: latest
+  tags:
+  - install
+
+
 # TODO: Only for work
 - name: Ensure slack is installed
   shell: yay -S --noconfirm slack-desktop

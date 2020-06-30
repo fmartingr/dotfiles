@@ -1,0 +1,8 @@
+---
+- name: Install
+  become: yes
+  package:
+    name: "{{ steam_package_name }}"
+    state: latest
+  tags:
+  - install
