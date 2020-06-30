@@ -16,7 +16,7 @@
         - xorg-xbacklight # Control laptop lighting
         - dunst # notifications
         - rofi # Menus
-        - polybar # status bar
+        - i3status # status bar
         - picom # compositor
         - feh # Wallpaper
     state: latest
@@ -49,17 +49,18 @@
     - reload i3 config
     - restart picom
 
-- name: Ensure polybar config folder is present
+- name: Ensure i3status config folder is present
   file:
-    path: "/home/{{ ansible_user }}/.config/polybar"
+    path: "/home/{{ ansible_user }}/.config/i3status"
     state: directory
   tags:
     - user_config
-- name: Install polybar configuration
+    
+- name: Install i3status configuration
   template:
-    src: .config/polybar/config.ini
-    dest: "/home/{{ ansible_user }}/.config/polybar/config.ini"
+    src: .config/i3status/config
+    dest: "/home/{{ ansible_user }}/.config/i3status/config"
   notify:
-    - restart polybar
+    - reload i3 config
   tags:
     - user_config

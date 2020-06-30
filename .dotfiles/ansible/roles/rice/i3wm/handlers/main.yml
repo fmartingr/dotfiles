@@ -3,9 +3,7 @@
 - name: reload i3 config
   shell: i3-msg -s $(ps x | grep i3 | grep socket | cut -d "=" -f 3) reload
   ignore_errors: yes # For first run
-- name: restart polybar
-  shell: polybar-msg cmd restart
-  ignore_errors: yes # For first run
+
 - name: restart picom
   shell: killall picom && picom -b
   ignore_errors: yes # For first run

@@ -187,9 +187,9 @@ focus_follows_mouse off
 # BAR  
 # ----------------------
 
-# Disable i3 status bar
 bar {
-    mode invisible
+    position top
+    status_command i3status
 }
 
 # ----------------------

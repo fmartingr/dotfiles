@@ -62,7 +62,7 @@ function df_apply {
 
 function df_check_changes {
   cd
-  if ! git diff-index --name-only HEAD --; then
+  if git diff-index --name-only HEAD -- > /dev/null; then
     echo "ERROR: There are changes present, aborting."
     exit 2
   fi
@@ -88,9 +88,12 @@ case "$DF_CMD" in
   "pull")
     df_pull
     ;;
-  "paplly")
+  "papply")
     df_pull
     df_apply
+    ;;
+  "check")
+    df_check_changes
     ;;
   "push")
     df_push
