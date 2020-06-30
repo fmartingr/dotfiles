@@ -9,8 +9,8 @@ set $shift Mod2
 set $cmdTerm termite
 set $cmdLauncher rofi -show drun
 set $cmdFileBrowser thunar
-set $cmdLock /bin/bash ~/.config/i3/i3lock.sh
-set $fontFamily Droid Mono Sans
+set $cmdLock i3lock
+set $fontFamily 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'
 set $fontSize 11
 
 # Displays
