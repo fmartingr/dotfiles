@@ -31,6 +31,8 @@
     - software/kvm
     - software/im
     - software/openshift
+    - software/syncthing
+    - software/keepassxc
     - devenv/frontend
     - devenv/golang
     - name: rice/i3wm

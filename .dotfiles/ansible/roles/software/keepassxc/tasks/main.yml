@@ -1,0 +1,8 @@
+---
+- name: Ensure installed
+  become: yes
+  package:
+    name: keepassxc
+    state: latest
+  tags:
+  - install
