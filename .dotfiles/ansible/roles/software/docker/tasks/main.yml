@@ -1,0 +1,17 @@
+---
+- name: Install
+  become: yes
+  package:
+    name: docker
+    state: latest
+  tags:
+  - install
+
+- name: Add user to group
+  become: yes
+  user:
+    name: "{{ ansible_facts.user_id }}"
+    groups: docker
+    append: yes
+  tags:
+  - config
