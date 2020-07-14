@@ -19,6 +19,7 @@
         - i3status # status bar
         - picom # compositor
         - feh # Wallpaper
+        - playerctl # Music control
     state: latest
   tags:
     - install
@@ -62,5 +63,19 @@
     dest: "/home/{{ ansible_user }}/.config/i3status/config"
   notify:
     - reload i3 config
+  tags:
+    - user_config
+
+- name: Ensure dunst config folder is present
+  file:
+    path: "/home/{{ ansible_user }}/.config/dunst"
+    state: directory
+  tags:
+    - user_config
+    
+- name: Install dunst configuration
+  template:
+    src: .config/dunst/dunstrc
+    dest: "/home/{{ ansible_user }}/.config/dunst/dunstrc"
   tags:
     - user_config
