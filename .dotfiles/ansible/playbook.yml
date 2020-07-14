@@ -1,4 +1,11 @@
 ---
+- name: Debug
+  hosts: all
+  roles:
+  - name: debug
+    tags:
+    - debug
+
 - name: Archlinux hosts
   hosts: archlinux
   roles:
@@ -23,7 +30,6 @@
 - name: Thinkpad
   hosts: thinkpad
   roles:
-    #- software/plymouth
     - software/browsers
     - software/terminals
     - software/editors
@@ -33,6 +39,7 @@
     - software/openshift
     - software/syncthing
     - software/keepassxc
+    - software/docker
     - devenv/frontend
     - devenv/golang
     - name: rice/i3wm
