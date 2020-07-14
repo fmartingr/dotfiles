@@ -1,0 +1,8 @@
+---
+- name: Ensure poetry is installed
+  become: yes
+  package:
+    name: python-poetry
+    state: latest
+  tags:
+  - install
