@@ -1,0 +1,2 @@
+- name: reload termite
+  shell: killall -USR1 termite

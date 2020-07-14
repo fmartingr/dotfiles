@@ -7,3 +7,19 @@
     state: latest
   tags:
     - install
+
+- name: Ensure termite config path exists
+  file:
+    path: "/home/{{ ansible_user }}/.config/termite"
+    state: directory
+  tags:
+  - user_config
+
+- name: install termite configuration
+  template:
+    src: .config/termite/config
+    dest: "/home/{{ ansible_user }}/.config/termite/config"
+  notify:
+  - reload termite
+  tags:
+    - user_config
