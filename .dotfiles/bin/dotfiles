@@ -16,6 +16,12 @@
 
 DF_CMD=${1:-help}
 REQUIRED_TOOLS=("ansible" "yay")
+TEMP_INVENTORY=$(mktemp)
+
+function parse_inventory {
+  cp "$HOME/.dotfiles/ansible/inventory" "$TEMP_INVENTORY"
+  sed -i "s/^#$(hostname)/$(hostname)/" "$TEMP_INVENTORY"
+}
 
 function df_help {
     echo "Dotfiles!"
@@ -41,23 +47,25 @@ function df_doctor {
         echo "$(tput setaf 196)$(tput bold)not present$(tput sgr0)"
       fi
     done
+
+    if [[ $* == *"--ansible-debug"* ]]; then
+      parse_inventory
+      ansible-playbook -i "$TEMP_INVENTORY" "$HOME/.dotfiles/ansible/playbook.yml" --tags debug
+    fi
 }
 
 function df_apply {
   ansible_flags=
 
   if [[ $* == *"--rice-only"* ]]; then
-    ansible_flags="--tags rice,user_config --skip-tags install,config"
+    ansible_flags="--tags rice,user_config --skip-tags install,config,debug"
   else
-    ansible_flags="--ask-become"
+    ansible_flags="--ask-become --skip-tags debug"
   fi
 
   set -xe
-  temp_inventory=$(mktemp)
-  cp "$HOME/.dotfiles/ansible/inventory" "$temp_inventory"
-  sed -i "s/^#$(hostname)/$(hostname)/" "$temp_inventory"
-  ansible-playbook -i "$temp_inventory" "$HOME/.dotfiles/ansible/playbook.yml" $ansible_flags
-  rm "$temp_inventory"
+  parse_inventory
+  ansible-playbook -i "$TEMP_INVENTORY" "$HOME/.dotfiles/ansible/playbook.yml" $ansible_flags
 }
 
 function df_check_changes {
@@ -99,7 +107,7 @@ case "$DF_CMD" in
   "push")
     df_push
     ;;
-  "help" | *)
+  "help")
     df_help
     ;;
 esac
