@@ -15,8 +15,8 @@ set $fontSize 11
 
 # Displays
 # TODO: get displays from ansible facts or host configuration
-set $displayMain DP-0
-set $displayAux HDMI-0
+set $displayMain DP1-3
+set $displayAux DP1-1
 
 # ----------------------
 # WORKSPACES
@@ -126,9 +126,12 @@ bindsym $mod+Shift+r restart
 bindsym $mod+l exec $cmdLock
 
 # Scratchpad
-bindsym $mod+Shift+minus move scratchpad # Move window to scratchpad
-bindsym $mod+minus scratchpad show # Iterate scratchpad windows
-bindsym $mod+x floating disable # Remove window from scratchpad
+ # Move window to scratchpad
+bindsym $mod+Shift+minus move scratchpad
+ # Iterate scratchpad windows
+bindsym $mod+minus scratchpad show
+ # Remove window from scratchpad
+bindsym $mod+x floating disable
 
 # Toggle window as sticky
 bindsym $mod+j sticky toggle
@@ -225,7 +228,6 @@ bindsym Shift+Mod1+4 exec flameshot gui --path ~/Pictures/Screenshots
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
-
 # ----------------------
 # STARTUP
 # ----------------------
@@ -238,7 +240,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 # exec --no-startup-id zeal
 exec --no-startup-id autorandr --change
 exec --no-startup-id picom -b
-exec --no-startup-id polybar -c ~/.config/polybar/config.ini main
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
-exec --no-startup-id feh --bg-fill ~/.wallpaper
+exec_always --no-startup-id feh --bg-fill ~/.wallpaper
