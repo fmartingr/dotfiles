@@ -1,0 +1,9 @@
+{
+    "window.menuBarVisibility": "hidden",
+    "workbench.panel.defaultLocation": "right",
+    "window.autoDetectColorScheme": true,
+    "workbench.colorTheme": "Solarized Light",
+    "workbench.preferredLightColorTheme": "Solarized Light",
+    "workbench.preferredDarkColorTheme": "Solarized Dark",
+    "editor.lineNumbers": "relative"
+}

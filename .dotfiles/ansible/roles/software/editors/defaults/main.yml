@@ -1,0 +1,3 @@
+vscode_extenions:
+- vscodevim.vim # Vim emulation
+- ms-vscode-remote.vscode-remote-extensionpack # Remote development

@@ -10,9 +10,10 @@
     state: latest
 
 - name: Ensure code is installed
-  become: yes
   tags:
   - install
-  package:
-    name: code
-    state: latest
+  shell: yay -S --noconfirm visual-studio-code-bin
+
+- name: Install code extensions
+  shell: code --install-extension {{ item }}
+  with_items: "{{ vscode_extenions }}"
