@@ -5,6 +5,7 @@
     name:
     - jq # JSON manipulation in terminal
     - the_silver_searcher # file search
+    - httpie # better curl
     state: latest
   tags:
     - install
