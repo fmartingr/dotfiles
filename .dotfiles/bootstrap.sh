@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REMOTE=git@git.sr.ht:~fmartingr/dotfiles
+REMOTE=git@github.com:fmartingr/dotfiles.git
 
 cd
 
