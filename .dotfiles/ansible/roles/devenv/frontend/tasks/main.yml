@@ -4,6 +4,7 @@
   package:
     name:
       - nodejs
+      - npm
       - yarn
     state: latest
   tags:
