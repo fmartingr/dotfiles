@@ -15,3 +15,11 @@
     dest: "/home/{{ ansible_user }}/.ssh/config"
   tags:
     - user_config
+
+- name: Install utils
+  become: yes
+  package:
+    name:
+    - fzf
+  tags:
+  - install

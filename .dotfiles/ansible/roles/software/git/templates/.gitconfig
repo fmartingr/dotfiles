@@ -1,6 +1,7 @@
 [user]
 	email = me@fmartingr.com
 	name = Felipe M.
+	signingkey = 716BC147715E716F
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -9,7 +10,7 @@
 	required = true
 
 [core]
-	editor = vim
+	editor = nvim
 
 [alias]
 	s = status
@@ -19,3 +20,6 @@
 	last = log -1 HEAD
 	cane = commit --amend --no-edit
 	lo = log --oneline -n 10
+
+[commit]
+	gpgsign = true

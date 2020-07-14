@@ -6,8 +6,11 @@ source <("/usr/bin/starship" init zsh --print-full-init)
 # oh-my-zsh plugin
 antigen use oh-my-zsh
 
+# Enable fzf
+antigen bundle fzf
+
 # Set theme
-antigen theme blinks
+antigen theme denysdovhan/spaceship-prompt
 
 antigen apply
 

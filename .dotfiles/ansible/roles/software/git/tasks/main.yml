@@ -11,7 +11,7 @@
 
 - name: Ensure .gitconfig is up to date
   template:
-    src: .gitconfig.j2
+    src: .gitconfig
     dest: "/home/{{ ansible_user }}/.gitconfig"
   tags:
     - user_config

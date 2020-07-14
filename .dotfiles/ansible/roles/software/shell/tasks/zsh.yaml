@@ -29,7 +29,7 @@
 
 - name: Install .zshrc
   template:
-    src: zshrc.j2
+    src: zshrc
     dest: "/home/{{ ansible_user }}/.zshrc"
   tags:
     - user_config
