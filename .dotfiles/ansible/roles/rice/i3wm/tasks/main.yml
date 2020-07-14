@@ -20,6 +20,7 @@
         - picom # compositor
         - feh # Wallpaper
         - playerctl # Music control
+        - autorandr # Automatic display configuration
     state: latest
   tags:
     - install
