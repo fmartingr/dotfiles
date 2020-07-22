@@ -14,7 +14,7 @@
         - i3lock-color # Lockscreen
         - flameshot # Screenshots
         - xorg-xbacklight # Control laptop lighting
-        - dunst # notifications
+        # - dunst # notifications
         - rofi # Menus
         - i3status # status bar
         - picom # compositor
@@ -67,16 +67,16 @@
   tags:
     - user_config
 
-- name: Ensure dunst config folder is present
-  file:
-    path: "/home/{{ ansible_user }}/.config/dunst"
-    state: directory
-  tags:
-    - user_config
+# - name: Ensure dunst config folder is present
+#   file:
+#     path: "/home/{{ ansible_user }}/.config/dunst"
+#     state: directory
+#   tags:
+#     - user_config
     
-- name: Install dunst configuration
-  template:
-    src: .config/dunst/dunstrc
-    dest: "/home/{{ ansible_user }}/.config/dunst/dunstrc"
-  tags:
-    - user_config
+# - name: Install dunst configuration
+#   template:
+#     src: .config/dunst/dunstrc
+#     dest: "/home/{{ ansible_user }}/.config/dunst/dunstrc"
+#   tags:
+#     - user_config
